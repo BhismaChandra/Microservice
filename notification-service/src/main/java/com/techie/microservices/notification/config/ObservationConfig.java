@@ -1,0 +1,23 @@
+package com.techie.microservices.notification.config;
+
+import jakarta.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
+
+@Configuration
+@RequiredArgsConstructor
+public class ObservationConfig {
+
+    private final ConcurrentKafkaListenerContainerFactory concurrentKafkaListenerContainerFactory;
+
+    @PostConstruct
+    public void setObservationForKafkaTemplate() {
+        concurrentKafkaListenerContainerFactory.getContainerProperties().setMicrometerEnabled(true);
+    }
+
+//    @Bean
+//    ObservedAspect observedAspect(ObservationRegistry registry) {
+//        return new ObservedAspect(registry);
+//    }
+}
